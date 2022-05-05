@@ -14,6 +14,8 @@
 #include <hidl/Status.h>
 #include <log/log.h>
 
+#include "UdfpsHandler.h"
+
 namespace android {
 namespace hardware {
 namespace biometrics {
@@ -36,6 +38,7 @@ using ::android::hardware::biometrics::fingerprint::V2_3::IBiometricsFingerprint
 struct BiometricsFingerprint : public IBiometricsFingerprint {
   public:
     BiometricsFingerprint();
+    ~BiometricsFingerprint();
 
     // Methods from ::android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint
     // follow.
@@ -60,6 +63,8 @@ struct BiometricsFingerprint : public IBiometricsFingerprint {
 
 private:
     sp<IBiometricsFingerprint_2_1> mService;
+    UdfpsHandlerFactory* mUdfpsHandlerFactory;
+    UdfpsHandler* mUdfpsHandler;
 };
 
 }  // namespace implementation
