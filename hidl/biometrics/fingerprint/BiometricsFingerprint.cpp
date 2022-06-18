@@ -66,6 +66,9 @@ Return<uint64_t> BiometricsFingerprint::getAuthenticatorId() {
 }
 
 Return<RequestStatus> BiometricsFingerprint::cancel() {
+    if (mUdfpsHandler) {
+        mUdfpsHandler->cancel();
+    }
     return mService->cancel();
 }
 
