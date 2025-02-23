@@ -144,6 +144,8 @@ constexpr int32_t SENSOR_TYPE_BASE = static_cast<int32_t>(SensorType::DEVICE_PRI
 const std::string kTsDoubleTapPressedPath = kTsPath + "double_tap_pressed";
 const std::string kTsDoubleTapEnabledPath = kTsPath + "double_tap_enabled";
 
+constexpr int32_t SENSOR_TYPE_BASE = static_cast<int32_t>(SensorType::DEVICE_PRIVATE_BASE) + 100;
+
 class DoubleTapSensor : public SysfsPollingOneShotSensor {
   public:
     DoubleTapSensor(int32_t sensorHandle, ISensorsEventCallback* callback)
