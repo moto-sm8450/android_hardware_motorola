@@ -59,6 +59,7 @@ class GoodixUdfpsHandler : public UdfpsHandler {
     }
 
     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         enableHighBrightFod();
         std::thread([this]() {
             std::this_thread::sleep_for(std::chrono::milliseconds(200));
