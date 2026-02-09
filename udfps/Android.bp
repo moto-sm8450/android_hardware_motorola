@@ -20,6 +20,10 @@ cc_defaults {
         "motofingerprint_headers",
     ],
     vendor: true,
+    cflags: select(soong_config_variable("moto_udfps", "enable_screenoff_sleep"), {
+        true: ["-DENABLE_SCREENOFF_SLEEP=true"],
+        default: [],
+    }),
 }
 
 cc_library {

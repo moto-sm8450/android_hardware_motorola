@@ -57,7 +57,9 @@ class MotoUdfpsHandler : public UdfpsHandler {
     }
 
     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
+#ifdef ENABLE_SCREENOFF_SLEEP
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
+#endif
         enableHighBrightFod();
         std::thread([this]() {
             std::this_thread::sleep_for(std::chrono::milliseconds(200));
