@@ -29,6 +29,7 @@ cc_binary {
     ],
     required: [
         "android.hardware.biometrics.face-service.motorola.xml",
+        "MotoSettingsFaceUnlock",
     ],
 }
 
