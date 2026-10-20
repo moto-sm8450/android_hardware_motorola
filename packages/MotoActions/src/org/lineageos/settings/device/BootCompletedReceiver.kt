@@ -7,10 +7,13 @@
 package org.lineageos.settings.device
 
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.util.Log
+import org.lineageos.settings.device.face.MotoAuthClient
 
 class BootCompletedReceiver : BroadcastReceiver() {
 
@@ -20,6 +23,24 @@ class BootCompletedReceiver : BroadcastReceiver() {
             Intent(context, MotoActionsService::class.java),
             UserHandle.CURRENT,
         )
+
+        val pm = context.packageManager
+        val supported = pm.hasSystemFeature(PackageManager.FEATURE_FACE) &&
+            pm.hasSystemFeature(MotoAuthClient.CLIENT_PACKAGE)
+
+        pm.setComponentEnabledSetting(
+            ComponentName(context, MotoFaceAuthService::class.java),
+            if (supported) {
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            } else {
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+            },
+            PackageManager.DONT_KILL_APP,
+        )
+
+        if (supported) {
+            context.startService(Intent(context, MotoFaceAuthService::class.java))
+        }
     }
 
     companion object {

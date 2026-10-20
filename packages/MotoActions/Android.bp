@@ -17,6 +17,8 @@ android_app {
     static_libs: [
         "androidx.core_core",
         "androidx.preference_preference",
+        "com.motorola.hardware.biometric.face.bridge-aidl-V1-java",
+        "moto-face-framework",
         "org.lineageos.settings.resources",
     ],
 
@@ -25,4 +27,16 @@ android_app {
         proguard_flags_files: ["proguard.flags"],
         shrink_resources: true,
     },
+
+    required: [
+        "privapp-permissions-motoactions",
+    ],
+}
+
+prebuilt_etc {
+    name: "privapp-permissions-motoactions",
+    system_ext_specific: true,
+    src: "privapp-permissions-motoactions.xml",
+    sub_dir: "permissions",
+    filename_from_src: true,
 }
